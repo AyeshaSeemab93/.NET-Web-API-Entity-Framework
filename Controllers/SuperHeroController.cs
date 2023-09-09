@@ -15,9 +15,9 @@ namespace SuperHeroApi.Controllers
     [ApiController]
     public class SuperHeroController : ControllerBase
     {
-        private readonly ISuperHeroService superHeroService;
+        private readonly ISuperHeroService _superHeroService;
 
-        //create the constructor to inject the interface
+        //create the constructor to inject the interface (dependency injection)
         public SuperHeroController(ISuperHeroService superHeroService)
         {
             //click --create & assign field
@@ -43,98 +43,83 @@ namespace SuperHeroApi.Controllers
             //        address = "New York City" }
             //    };
 
-            //return Ok(result);
-            return superHeroes;
+            ////return Ok(result);
+            //return Ok(superHeroes);
+
+            var result = _superHeroService.GetAllHeroes();
+            if (result is null)
+                return NotFound("Hero Not Found");
+            return Ok(result);
+
+
         }
 
-        //way 2
-        [HttpGet("2")]
-        public IActionResult GetHeroes()
-        {
-            //var result = new List<SuperHero>
-            //{
-            //    new SuperHero
-            //    {
-            //        Id = 1,
-            //        Name = "Spider Man",
-            //        FirstName = "Peter",
-            //        LastName = "Parker",
-            //        address = "New York City" }
-            //};
-
-            //return Ok(result);
-            return Ok(superHeroes);
-        }
-
-
-        //way 3
-        [HttpGet("3")]
-        public async Task<IEnumerable<SuperHero>> Get()
-
-        {
-
-            return superHeroes;
-        }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SuperHero>> GetsingleHero(int id)
-        {
+        {//way 1
             //    var selectedhero = superHeroes.Find(x => x.Id == id);
             //    if (selectedhero is null) {
             //        return NotFound("does not exist");
             //    }
+            //way 2
+            //foreach (var hero in superHeroes)
+            //{
+            //    if (hero.Id == id)
 
-            foreach (var hero in superHeroes)
-            {
-                if (hero.Id == id)
+            //        return Ok(hero);
+            //}
+            //return NotFound("does not exist");
 
-                    return Ok(hero);
-            }
-            return NotFound("does not exist");
+            var result = _superHeroService.GetsingleHero(id);
+            if (result is null)
+                return NotFound("Hero Not Found");
+            return Ok(result);
         }
 
 
         [HttpPost]
 
-        public async Task<IEnumerable<SuperHero>> AddHero([FromBody] SuperHero hero)
+        public async Task<ActionResult<List<SuperHero>>> AddHero(SuperHero hero)
         {
-            superHeroes.Add(hero);
-            return superHeroes;
+            //superHeroes.Add(hero);
+            //return superHeroes;
+
+            var result = _superHeroService.AddHero(hero);
+          
+            return Ok(result);
+
         }
 
 
         // find superhero with the similar id of newhero.Update the name etc with new one
 
         [HttpPut]
-        public async Task<ActionResult<SuperHero>> UpdateHero(SuperHero newhero)
+        public async Task<ActionResult<List<SuperHero>>> UpdateHero(SuperHero newhero)
 
         {
-            //way 1 to go through the list using foreach
+            //moved to services-class
+            //var hero = superHeroes.Find(f => f.Id == newhero.Id);
+            //if (hero is null)
+            //{ return NotFound("hero does not exist"); }
+            //else
+            //    hero.Name = newhero.Name;
+            //hero.FirstName = newhero.FirstName;
+            //hero.LastName = newhero.LastName;
+
+            //return Ok(superHeroes);
 
 
-            //foreach(var hero in superHeroes)
-            //    {
-            //        if (hero.Id == newhero.Id)
-            //        {
-            //            hero.Name = newhero.Name;
-            //            hero.FirstName = newhero.FirstName;
-            //            hero.LastName = newhero.LastName;
+    //receiving from services-class through constructor and displaying it
 
-            //        }
-            //}
+            var result = _superHeroService.UpdateHero(newhero);
+            if(result is null)
+            {
+                return NotFound("hero does not exist");
+            }
+            return Ok(result);
 
-            //way 2 to go through list
-
-            var hero = superHeroes.Find(f => f.Id == newhero.Id);
-            if (hero is null)
-            { return NotFound("hero does not exist"); }
-            else
-                hero.Name = newhero.Name;
-            hero.FirstName = newhero.FirstName;
-            hero.LastName = newhero.LastName;
-
-            return Ok(superHeroes);
         }
         [HttpDelete]
         public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
@@ -147,8 +132,9 @@ namespace SuperHeroApi.Controllers
             //return superHeroes;
 
             //Now lets brings services to use(through contructor):
+            //receiving from services-class through constructor and displaying it
 
-            Version result = _superHeroService.DeleteHero(id);
+            var result = _superHeroService.DeleteHero(id);
             
             if (result is null)  //all same above code 
                 return NotFound("does not exist");

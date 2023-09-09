@@ -38,12 +38,13 @@ namespace SuperHeroApi.Services.SuperHeroService
 
 
 
-        public IEnumerable<SuperHero> AddHero([FromBody] SuperHero hero)
+        public List<SuperHero> AddHero([FromBody] SuperHero hero)
         {
-            throw new NotImplementedException();
+            superHeroes.Add(hero);
+            return superHeroes;
         }
 
-        public List<SuperHero> DeleteHero(int id)
+        public List<SuperHero>? DeleteHero(int id) //? to remove green line from under null.it means list can be null
         {
             var hero = superHeroes.Find(x => x.Id == id);
             if (hero is null)
@@ -53,30 +54,43 @@ namespace SuperHeroApi.Services.SuperHeroService
             return superHeroes;
         }
 
-        public IEnumerable<SuperHero> Get()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public List<SuperHero> GetAllHeroes()
         {
-            throw new NotImplementedException();
+            return superHeroes;
         }
 
-        public IActionResult GetHeroes()
+
+        public SuperHero? GetsingleHero(int id)
         {
-            throw new NotImplementedException();
+
+            foreach (var hero in superHeroes)
+            {
+                if (hero.Id == id)
+
+                    return hero;
+            }
+            //return NotFound("does not exist");
+            return null;
         }
 
-        public SuperHero GetsingleHero(int id)
+        public List<SuperHero>? UpdateHero(SuperHero newhero)
         {
-            throw new NotImplementedException();
+            var hero = superHeroes.Find(f => f.Id == newhero.Id);
+            if (hero is null)
+            //{ return NotFound("hero does not exist"); }
+            { return null; }
+            else
+            {
+                hero.Name = newhero.Name;
+                hero.FirstName = newhero.FirstName;
+                hero.LastName = newhero.LastName;
+
+                return superHeroes;
+            }
         }
 
-        public SuperHero UpdateHero(SuperHero newhero)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

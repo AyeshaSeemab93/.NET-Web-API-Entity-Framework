@@ -1,5 +1,5 @@
 ﻿using System;
-namespace SuperHeroApi
+namespace SuperHeroApi.Models
 {
 	public class SuperHero
 	{
@@ -10,10 +10,11 @@ namespace SuperHeroApi
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
 
-        public string address { get; set; } = string.Empty;
+        public string? address { get; set; }
 
 
-
+        //? and string.Empty work here same
+        //means can be null/empty
     }
 }
 

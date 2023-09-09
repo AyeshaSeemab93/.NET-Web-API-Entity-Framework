@@ -3,23 +3,19 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SuperHeroApi.Services
+namespace SuperHeroApi.Services.SuperHeroService
 {
 	public interface ISuperHeroService
     {
 
         //copy paste (method names + return type) from controller here in interface
-        List<SuperHero> GetAllHeroes();
+      List<SuperHero> GetAllHeroes();
 
-        IActionResult GetHeroes();
+       SuperHero? GetsingleHero(int id);
 
-        IEnumerable<SuperHero> Get();
+      List<SuperHero> AddHero(SuperHero hero);
 
-        SuperHero? GetsingleHero(int id);
-
-        List<SuperHero> AddHero(SuperHero hero);
-
-        List<SuperHero>? UpdateHero(SuperHero newhero);
+       List<SuperHero>? UpdateHero(SuperHero newhero);
 
         List<SuperHero>? DeleteHero(int id);
 

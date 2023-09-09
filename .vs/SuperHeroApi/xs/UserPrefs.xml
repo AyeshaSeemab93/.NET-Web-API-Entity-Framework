@@ -1,3 +1,30 @@
-﻿<Properties StartupConfiguration="{84A5EF42-E0F9-4D7E-AC09-27513744B3B7}|https">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{84A5EF42-E0F9-4D7E-AC09-27513744B3B7}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.SuperHeroApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/SuperHeroController.cs">
+    <Files>
+      <File FileName="Controllers/SuperHeroController.cs" Line="56" Column="1" />
+      <File FileName="Services/SuperHeroService/SuperHeroService.cs" Line="23" Column="37" />
+      <File FileName="Program.cs" Line="2" Column="27" />
+      <File FileName="Services/ISuperHeroService.cs" Line="12" Column="40" />
+      <File FileName="Controllers/SuperHeroController (Primary).cs" Line="63" Column="12" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SuperHeroApi">
+            <Node name="SuperHeroApi">
+              <Node name="Controllers">
+                <Node name="SuperHeroController.cs" selected="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

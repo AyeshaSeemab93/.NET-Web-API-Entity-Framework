@@ -1,7 +1,8 @@
 ﻿
-
-//global using SuperHeroApi.Models;
-
+global using SuperHeroApi;
+global using SuperHeroApi.Models;
+using SuperHeroApi.Services;
+using SuperHeroApi.Services.SuperHeroService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// register service here yourself or interface wont work
+builder.Services.AddScoped<ISuperHeroService, SuperHeroService>();
 
 var app = builder.Build();
 
