@@ -5,24 +5,19 @@ namespace SuperHeroApi.Data
 {
 
     //Inherit DbContext and add usings by click on red
-    public class DataContext : DbContext 
+    public class DataContext : DbContext
     {
         //constructor
-                        //DB Context option of DataContext name:option :  inherit base constructor
+        //DB Context option of DataContext name:option :  inherit base constructor
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
-        //connection string, just write override config (automatically method written)
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
 
-            //write this to tell we want to use sql or Entity framework
-            optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=superherodb;Trusted_Connection=true;TrustServerCertificate=true;");
 
-        }
-        //create table in database.Its called property ob db set
+
+
+       //creating table here with name SuperHeroes in database
         public DbSet<SuperHero> SuperHeroes { get; set; }
 
 

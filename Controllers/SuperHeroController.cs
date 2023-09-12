@@ -46,11 +46,11 @@ namespace SuperHeroApi.Controllers
             ////return Ok(result);
             //return Ok(superHeroes);
 
-            var result = _superHeroService.GetAllHeroes();
-            if (result is null)
-                return NotFound("Hero Not Found");
-            return Ok(result);
 
+            //receiving the method results from services method(where it is written properly)via dependency injection
+            var result = await _superHeroService.GetAllHeroes(); 
+
+            return Ok(result);
 
         }
 
@@ -72,7 +72,7 @@ namespace SuperHeroApi.Controllers
             //}
             //return NotFound("does not exist");
 
-            var result = _superHeroService.GetsingleHero(id);
+            var result =await _superHeroService.GetsingleHero(id);
             if (result is null)
                 return NotFound("Hero Not Found");
             return Ok(result);
@@ -81,12 +81,12 @@ namespace SuperHeroApi.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<List<SuperHero>>> AddHero(SuperHero hero)
+        public async Task<ActionResult<List<SuperHero>>> AddHero(int id, SuperHero hero)
         {
             //superHeroes.Add(hero);
             //return superHeroes;
 
-            var result = _superHeroService.AddHero(hero);
+            var result =await _superHeroService.AddHero(hero);
           
             return Ok(result);
 
@@ -96,7 +96,7 @@ namespace SuperHeroApi.Controllers
         // find superhero with the similar id of newhero.Update the name etc with new one
 
         [HttpPut]
-        public async Task<ActionResult<List<SuperHero>>> UpdateHero(SuperHero newhero)
+        public async Task<ActionResult<List<SuperHero>>> UpdateHero(int id, SuperHero newhero)
 
         {
             //moved to services-class
@@ -113,7 +113,7 @@ namespace SuperHeroApi.Controllers
 
     //receiving from services-class through constructor and displaying it
 
-            var result = _superHeroService.UpdateHero(newhero);
+            var result =await _superHeroService.UpdateHero(id, newhero);
             if(result is null)
             {
                 return NotFound("hero does not exist");
@@ -134,7 +134,7 @@ namespace SuperHeroApi.Controllers
             //Now lets brings services to use(through contructor):
             //receiving from services-class through constructor and displaying it
 
-            var result = _superHeroService.DeleteHero(id);
+            var result = await _superHeroService.DeleteHero(id);
             
             if (result is null)  //all same above code 
                 return NotFound("does not exist");

@@ -1,25 +1,28 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{84A5EF42-E0F9-4D7E-AC09-27513744B3B7}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.SuperHeroApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/SuperHeroController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Migrations/20230909231615_InitialCreate.cs">
     <Files>
-      <File FileName="Controllers/SuperHeroController.cs" Line="56" Column="1" />
-      <File FileName="Services/SuperHeroService/SuperHeroService.cs" Line="23" Column="37" />
-      <File FileName="Program.cs" Line="2" Column="27" />
-      <File FileName="Services/ISuperHeroService.cs" Line="12" Column="40" />
-      <File FileName="Controllers/SuperHeroController (Primary).cs" Line="63" Column="12" />
+      <File FileName="Controllers/SuperHeroController.cs" Line="9" Column="29" />
+      <File FileName="Services/SuperHeroService/SuperHeroService.cs" Line="44" Column="32" />
+      <File FileName="Program.cs" Line="22" Column="1" />
+      <File FileName="Models/SuperHero.cs" Line="1" Column="1" />
+      <File FileName="DataContext.cs" Line="29" Column="41" />
+      <File FileName="Migrations/20230909231615_InitialCreate.cs" Line="38" Column="1" />
+      <File FileName="Migrations/DataContextModelSnapshot.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SuperHeroApi">
-            <Node name="SuperHeroApi">
-              <Node name="Controllers">
-                <Node name="SuperHeroController.cs" selected="True" />
-              </Node>
-              <Node name="Properties" expanded="True" />
+            <Node name="SuperHeroApi" selected="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Migrations" expanded="True" />
             </Node>
           </Node>
         </State>

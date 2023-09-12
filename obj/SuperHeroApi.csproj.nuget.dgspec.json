@@ -53,7 +53,7 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.10, )"
             },

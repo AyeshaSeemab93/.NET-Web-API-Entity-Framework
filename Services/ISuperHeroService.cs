@@ -9,15 +9,15 @@ namespace SuperHeroApi.Services.SuperHeroService
     {
 
         //copy paste (method names + return type) from controller here in interface
-      List<SuperHero> GetAllHeroes();
+       Task<List<SuperHero>> GetAllHeroes();
 
-       SuperHero? GetsingleHero(int id);
+        Task<SuperHero?> GetsingleHero(int id);
 
-      List<SuperHero> AddHero(SuperHero hero);
+        Task<List<SuperHero>?> AddHero(SuperHero hero);
 
-       List<SuperHero>? UpdateHero(SuperHero newhero);
+        Task<List<SuperHero>?> UpdateHero(int id, SuperHero newhero);
 
-        List<SuperHero>? DeleteHero(int id);
+        Task<List<SuperHero>?> DeleteHero(int id);
 
         //? came from adding it to method in class, make it nullable
 

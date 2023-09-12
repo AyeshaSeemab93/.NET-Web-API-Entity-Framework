@@ -4,6 +4,7 @@ global using SuperHeroApi.Models;
 global using SuperHeroApi.Data;
 using SuperHeroApi.Services;
 using SuperHeroApi.Services.SuperHeroService;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,16 @@ builder.Services.AddSwaggerGen();
 
 // register service here yourself or interface wont work
 builder.Services.AddScoped<ISuperHeroService, SuperHeroService>();
-//register DataContext here
-builder.Services.AddDbContext<DataContext>();
+
+
+//register DataContext here + configure/register the sql database here and tell to use sqlite
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+//DefaultConnection is name of connection string created in appsetting.json
+
+
+
+
 
 var app = builder.Build();
 

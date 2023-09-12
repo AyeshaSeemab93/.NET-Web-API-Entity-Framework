@@ -1,13 +1,14 @@
 ﻿//CLASS, INHERIT THE INTERFCAE
 using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuperHeroApi.Services.SuperHeroService
 {
     public class SuperHeroService : ISuperHeroService
     {
 
-        public static List<SuperHero> superHeroes = new List<SuperHero>{
+        public static List<SuperHero> SuperHeroes = new List<SuperHero>{
             new SuperHero
             {
                 Id = 1,
@@ -37,47 +38,75 @@ namespace SuperHeroApi.Services.SuperHeroService
         };
 
 
+        //inject the database now in services -Ceate constructor
+        private readonly DataContext _context;
 
-        public List<SuperHero> AddHero([FromBody] SuperHero hero)
+        public SuperHeroService(DataContext context)
         {
-            superHeroes.Add(hero);
-            return superHeroes;
+            _context = context;
         }
 
-        public List<SuperHero>? DeleteHero(int id) //? to remove green line from under null.it means list can be null
+
+
+
+
+
+        //CRUD Operations:
+
+        public async Task<List<SuperHero>?> AddHero([FromBody] SuperHero hero)
         {
-            var hero = superHeroes.Find(x => x.Id == id);
+            //adding hero to table
+            _context.SuperHeroes.Add(hero);
+            //saving in database
+            await _context.SaveChangesAsync();
+
+            return await _context.SuperHeroes.ToListAsync(); ;
+        }
+
+        public async Task<List<SuperHero>?> DeleteHero(int id) //? to remove green line from under null.it means list can be null
+        {
+            //var hero = SuperHeroes.Find(x => x.Id == id);
+            var hero = await _context.SuperHeroes.FindAsync(id);
             if (hero is null)
                 //return NotFound("does not exist"); can not return status code here so return null or empty list
                 return null;
-            superHeroes.Remove(hero);
-            return superHeroes;
+            _context.SuperHeroes.Remove(hero);
+            //save changes in datbase
+            await _context.SaveChangesAsync();
+            return await _context.SuperHeroes.ToListAsync(); ;
         }
 
 
 
-        public List<SuperHero> GetAllHeroes()
+        public async Task<List<SuperHero>> GetAllHeroes()
         {
-            return superHeroes;
+            //bringing data from database
+            var heroes = await _context.SuperHeroes.ToListAsync(); //SuperHeroes = name of table in database
+            return heroes;
+            //bec we are returning async so add task in method(asyns added automatically)
         }
 
 
-        public SuperHero? GetsingleHero(int id)
+        public async Task<SuperHero?> GetsingleHero(int id)
         {
 
-            foreach (var hero in superHeroes)
-            {
-                if (hero.Id == id)
+            //foreach (var hero in SuperHeroes)
+            //{
+            //    if (hero.Id == id)
 
-                    return hero;
-            }
-            //return NotFound("does not exist");
-            return null;
+            //        return hero;
+            //}
+            var hero = await _context.SuperHeroes.FindAsync(id);
+            if (hero is null)
+                return null;
+            return hero;
         }
+    
 
-        public List<SuperHero>? UpdateHero(SuperHero newhero)
+        public async Task<List<SuperHero>?> UpdateHero(int id, SuperHero newhero)
         {
-            var hero = superHeroes.Find(f => f.Id == newhero.Id);
+            //var hero = SuperHeroes.Find(f => f.Id == newhero.Id);
+            var hero = await _context.SuperHeroes.FindAsync(id);
             if (hero is null)
             //{ return NotFound("hero does not exist"); }
             { return null; }
@@ -87,10 +116,11 @@ namespace SuperHeroApi.Services.SuperHeroService
                 hero.FirstName = newhero.FirstName;
                 hero.LastName = newhero.LastName;
 
-                return superHeroes;
+                //save changes to databases
+                await _context.SaveChangesAsync();
+
+                return await _context.SuperHeroes.ToListAsync();
             }
         }
-
     }
 }
-
